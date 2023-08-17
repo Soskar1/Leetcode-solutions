@@ -11,27 +11,27 @@ public class Solution
 
     public bool IsValid(string s)
     {
-        Stack<char> openParentheses = new Stack<char>();
+        Stack<char> openBrackets = new Stack<char>();
 
         foreach (char c in s)
         {
             if (validParentheses.ContainsKey(c))
             {
-                if (openParentheses.Count == 0)
+                if (openBrackets.Count == 0)
                     return false;
 
-                char bracket = openParentheses.Pop();
+                char bracket = openBrackets.Pop();
 
                 if (bracket != validParentheses[c])
                     return false;
             }
             else
             {
-                openParentheses.Push(c);
+                openBrackets.Push(c);
             }
         }
 
-        if (openParentheses.Count > 0)
+        if (openBrackets.Count > 0)
             return false;
 
         return true;
