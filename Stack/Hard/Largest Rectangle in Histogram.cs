@@ -40,3 +40,37 @@ public class Solution
         return maxArea;
     }
 }
+
+//Stack Solution
+public class Solution2
+{
+    public int LargestRectangleArea(int[] heights)
+    {
+        Stack<(int, int)> columns = new Stack<(int, int)>();
+        int leftBoundary = 0;
+        int maxArea = 0;
+
+        for (int i = 0; i < heights.Length; ++i)
+        {
+            leftBoundary = i;
+
+            while (columns.Any() && columns.Peek().Item2 > heights[i])
+            {
+                var column = columns.Pop();
+                leftBoundary = column.Item1;
+                
+                maxArea = Math.Max(maxArea, Math.Max(column.Item2, column.Item2 * (i - leftBoundary)));
+            }
+
+            columns.Push((leftBoundary, heights[i]));
+        }
+
+        while (columns.Any())
+        {
+            var column = columns.Pop();
+            maxArea = Math.Max(maxArea, Math.Max(column.Item2, column.Item2 * (heights.Length - column.Item1)));
+        }
+
+        return maxArea;
+    }
+}
