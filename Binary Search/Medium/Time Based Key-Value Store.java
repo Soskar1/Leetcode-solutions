@@ -30,14 +30,7 @@ class TimeMap {
 
         if (TIME_MAP.containsKey(key)) {
             ArrayList<TimeStamp> list = TIME_MAP.get(key);
-            int index = search(list, 0, list.size() - 1, timestamp);
-
-            if (index != -1 && list.get(index).time == timestamp) {
-                list.set(index, newTimeStamp);
-            } else {
-                list.add(newTimeStamp);
-                list.sort(Comparator.comparing(TimeStamp::getTime));
-            }
+            list.add(newTimeStamp);
         } else {
             ArrayList<TimeStamp> list = new ArrayList<>();
             list.add(newTimeStamp);
